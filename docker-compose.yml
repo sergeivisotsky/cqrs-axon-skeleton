@@ -1,0 +1,23 @@
+version: '3.3'
+services:
+  axon-server:
+    image: axoniq/axonserver
+    hostname: axon-server
+    volumes:
+      - axonserver-data:/data
+      - axonserver-events:/eventdata
+      - axonserver-config:/config:ro
+    ports:
+      - '8024:8024'
+      - '8124:8124'
+      - '8224:8224'
+    networks:
+      - axon-server
+
+volumes:
+  axonserver-data:
+  axonserver-events:
+  axonserver-config:
+
+networks:
+  axon-server:
