@@ -14,50 +14,30 @@ public class AsyncOperationService {
 
     @Async("asyncExecutor")
     public CompletableFuture<String> uppercaseString(String someString) {
-
-        LOG.info("Started...");
-
-        try {
-            Thread.sleep(1000L);
-        } catch (InterruptedException e) {
-            throw new IllegalStateException(e);
-        }
-
-        LOG.info("Proceeding...");
-
+        sleepThread("uppercaseString()");
         return CompletableFuture.completedFuture(someString.toUpperCase());
     }
 
     @Async("asyncExecutor")
     public CompletableFuture<String> substringString(String someString) {
-
-        LOG.info("Started...");
-
-        try {
-            Thread.sleep(1000L);
-        } catch (InterruptedException e) {
-            throw new IllegalStateException(e);
-        }
-
-        LOG.info("Proceeding...");
-
+        sleepThread("substringString()");
         return CompletableFuture.completedFuture(someString.substring(0, 3));
     }
 
     @Async("asyncExecutor")
     public CompletableFuture<String> appendString(String someString) {
+        sleepThread("appendString()");
+        return CompletableFuture.completedFuture(someString + "BBB");
+    }
 
-        LOG.info("Started...");
-
+    private void sleepThread(String methodName) {
+        LOG.info("Started {}...", methodName);
         try {
             Thread.sleep(1000L);
         } catch (InterruptedException e) {
             throw new IllegalStateException(e);
         }
-
-        LOG.info("Proceeding...");
-
-        return CompletableFuture.completedFuture(someString + "BBB");
+        LOG.info("Proceeding {}...", methodName);
     }
 
 }
